@@ -63,7 +63,9 @@ export let login = asyncWrapper(async(req, res, next) => {
 export let logout = asyncWrapper(async(req, res, next) => {
     let options = {
         httpOnly: true,
-        expires: new Date(Date.now())
+        expires: new Date(Date.now()),
+        sameSite: 'none',
+        secure: true
     }
     res.status(200).cookie('token', '', options).json({
         success: true,
@@ -297,5 +299,41 @@ export let makeAdmin = asyncWrapper(async(req, res, next) => {
     res.json({
         success: true,
         message: `${user.name} in now an admin`
+    })
+})
+
+
+export let deleteUser = asyncWrapper(async(req, res, next) => {
+    let user = await User.findById(req.body.id)
+
+    if(!user){
+        return next(createCustomError('User not found', 404))
+    }
+
+    if(user.role === 'admin'){
+        return next(createCustomError('Cannot delete admin', 400))
+    }
+
+    await User.findByIdAndDelete(req.body.id)
+
+    res.json({
+        success: true,
+        message: 'User deleted successfully'
+    })
+})
+
+export let deleteMyProfile = asyncWrapper(async(req, res, next) => {
+    await cloudinary.v2.uploader.destroy(req.user.avatar.public_id)
+    await User.findByIdAndDelete(req.user._id)
+
+    let options = {
+        httpOnly: true,
+        expires: new Date(Date.now()),
+        sameSite: 'none',
+        secure: true
+    }
+    res.status(200).cookie('token', '', options).json({
+        success: true,
+        message: 'Your profile has been deleted successfully'
     })
 })

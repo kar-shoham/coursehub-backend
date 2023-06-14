@@ -27,3 +27,11 @@ export let adminAuth = (req, res, next) => {
     }
     next()
 }
+
+export let authPro = (req, res, next) => {
+    if(req.user.subscription.status !== 'active' && req.user.role !== 'admin'){
+        return next(createCustomError('Please subscribe to Pro pack to access this', 403))
+    }
+
+    next()
+}

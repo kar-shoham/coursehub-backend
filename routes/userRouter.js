@@ -1,5 +1,5 @@
 import express from 'express'
-import { changePassword, getUserDetails, login, logout, register, updateProfile, forgotPassword, resetPassword, addToPlaylist, removeFromPlaylist, updateProfilePicture, getAllUsers, makeAdmin } from '../controllers/userController.js';
+import { changePassword, getUserDetails, login, logout, register, updateProfile, forgotPassword, resetPassword, addToPlaylist, removeFromPlaylist, updateProfilePicture, getAllUsers, makeAdmin, deleteUser, deleteMyProfile } from '../controllers/userController.js';
 import {adminAuth, authenticate} from '../middlewares/auth.js'
 import singleUpload from '../middlewares/singleUpload.js'
 
@@ -18,5 +18,7 @@ router.route('/removefromplaylist').post(authenticate, removeFromPlaylist)
 router.route('/updateprofilepicture').patch(authenticate, singleUpload, updateProfilePicture)
 router.route('/admin/users').get(authenticate, adminAuth, getAllUsers)
 router.route('/makeadmin/:id').patch(authenticate, adminAuth, makeAdmin)
+router.route('/admin/deleteuser').delete(authenticate, adminAuth, deleteUser)
+router.route('/deletemyprofile').delete(authenticate, deleteMyProfile)
 
 export default router
