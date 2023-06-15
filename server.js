@@ -1,25 +1,13 @@
 import app from './app.js';
-import dotenv from 'dotenv';
 import connectDB from './config/connect.js';
 import cloudinary from 'cloudinary';
 import Razorpay from 'razorpay';
-import cors from 'cors'
-
-
-dotenv.config({
-    path: './config/config.env'
-})
 
 export let instance = new Razorpay({
     key_id: process.env.RAZORPAY_API_KEY,
     key_secret: process.env.RAZORPAY_API_SECRET
 });
 
-
-app.use(cors({
-    origin: process.env.FRONTEND_URL, 
-    credentials: true
-}))
 
 let start = async() => {
     let server = app.listen(process.env.PORT, () => {

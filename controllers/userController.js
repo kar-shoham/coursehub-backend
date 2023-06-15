@@ -64,8 +64,8 @@ export let logout = asyncWrapper(async(req, res, next) => {
     let options = {
         httpOnly: true,
         expires: new Date(Date.now()),
-        sameSite: 'none',
-        secure: true
+        secure: true,
+        sameSite: 'none'
     }
     res.status(200).cookie('token', '', options).json({
         success: true,
@@ -329,8 +329,8 @@ export let deleteMyProfile = asyncWrapper(async(req, res, next) => {
     let options = {
         httpOnly: true,
         expires: new Date(Date.now()),
-        sameSite: 'none',
-        secure: true
+        secure: true,
+        sameSite: 'none'
     }
     res.status(200).cookie('token', '', options).json({
         success: true,
