@@ -5,17 +5,12 @@ import courseRouter from './routes/courseRouter.js'
 import userRouter from './routes/userRouter.js'
 import paymentRouter from './routes/paymentRouter.js'
 import otherRouter from './routes/otherRouter.js'
-import cors from 'cors'
 
 let app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
-app.use(cors({
-    origin: 'http://localhost:5173/', 
-    credentials: true
-}))
 
 app.use('/api/v1', courseRouter)
 app.use('/api/v1', userRouter)
