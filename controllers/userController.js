@@ -304,7 +304,7 @@ export let makeAdmin = asyncWrapper(async(req, res, next) => {
 
 
 export let deleteUser = asyncWrapper(async(req, res, next) => {
-    let user = await User.findById(req.body.id)
+    let user = await User.findById(req.params.id)
 
     if(!user){
         return next(createCustomError('User not found', 404))

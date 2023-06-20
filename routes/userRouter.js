@@ -18,7 +18,7 @@ router.route('/removefromplaylist').post(authenticate, removeFromPlaylist)
 router.route('/updateprofilepicture').patch(authenticate, singleUpload, updateProfilePicture)
 router.route('/admin/users').get(authenticate, adminAuth, getAllUsers)
 router.route('/makeadmin/:id').patch(authenticate, adminAuth, makeAdmin)
-router.route('/admin/deleteuser').delete(authenticate, adminAuth, deleteUser)
+router.route('/admin/deleteuser/:id').delete(authenticate, adminAuth, deleteUser)
 router.route('/deletemyprofile').delete(authenticate, deleteMyProfile)
 
 export default router
