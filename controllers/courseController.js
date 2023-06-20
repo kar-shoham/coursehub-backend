@@ -6,7 +6,19 @@ import cloudinary from 'cloudinary'
 import userModel from '../models/userModel.js'
 
 export let getAllCourses = asyncWrapper(async(req, res, next) => {
-    let courses = await Course.find({}).select('-lectures')
+    let {keyword, category} = req.query
+    if(!keyword) keyword = ""
+    if(!category) category = ""
+    let courses = await Course.find({
+        title: { 
+            $regex: keyword, 
+            $options: 'i' 
+        },
+        category: {
+            $regex: category, 
+            $options: 'i'
+        }
+    }).select('-lectures')
     res.status(200).json({
         success: true,
         courses,
