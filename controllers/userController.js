@@ -176,7 +176,7 @@ export let forgotPassword = asyncWrapper(async(req, res, next) => {
     let token = user.getResetToken()
     await user.save()
 
-    let url = `${process.env.URL}/api/v1/resetpassword/${token}`
+    let url = `${process.env.FRONTEND_URL}/resetpassword/${token}`
 
     let message = `Hello ${user.name}, \nFollow the link below to update your password for coursehub\n ${url}`
 
