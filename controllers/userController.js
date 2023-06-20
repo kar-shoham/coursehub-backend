@@ -314,7 +314,7 @@ export let deleteUser = asyncWrapper(async(req, res, next) => {
         return next(createCustomError('Cannot delete admin', 400))
     }
 
-    await User.findByIdAndDelete(req.body.id)
+    await User.findByIdAndDelete(req.params.id)
 
     res.json({
         success: true,
