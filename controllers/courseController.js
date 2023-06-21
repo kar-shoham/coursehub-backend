@@ -70,7 +70,8 @@ export let getCourseLectures = asyncWrapper(async(req, res, next) => {
 
     res.status(200).json({
         success: true,
-        lectures: course.lectures
+        lectures: course.lectures,
+        title: course.title
     })
 })
 
