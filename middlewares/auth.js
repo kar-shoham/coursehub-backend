@@ -5,7 +5,6 @@ import User from '../models/userModel.js';
 
 export let authenticate = asyncWrapper(async(req, res, next) => {
     let {token} = req.cookies
-    console.log(token)
     if(!token){
         return next(createCustomError('Please login to access this resource', 401))
     }
